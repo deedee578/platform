@@ -1,7 +1,7 @@
 <div class="container card media-small">
   <div class="balances-box card-body p-0 d-flex justify-content-between">
     <div>
-      <div class="text-muted">Your Balance</div>
+      <div class="text-muted">Available Balance</div>
       <div class="text-muted">Supply Balance</div>
     </div>
 
@@ -19,7 +19,7 @@
 <div class="media-big">
   <div style="display:grid; grid-template-columns: 1fr 1fr; grid-gap:0.5em">
     <div class="container card">
-      <div class="text-muted">Your Balance</div>
+      <div class="text-muted">Available Balance</div>
       <div>
         {{ ((fiatBalance$ | async) | currency:'USD':'symbol':'1.2-2') || '...' }}
       </div>
