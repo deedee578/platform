@@ -1,5 +1,5 @@
 import { CoinDescriptor, CoinProviderConfig } from "./coin-provider-config";
-import { Account, CoinType } from "@trustwallet/types";
+import { CoinType } from "@trustwallet/types";
 import { environment } from "../../environments/environment";
 import {
   CosmosChainId,

@@ -1,9 +1,8 @@
 import { Injectable } from "@angular/core";
-import { Observable, timer } from "rxjs";
-import { map, shareReplay, switchMap } from "rxjs/operators";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 import { IPriceResponse } from "../../dto";
-import { CoinType } from "@trustwallet/types";
-import { FiatCoinType } from "@trustwallet/types";
+import { CoinType, FiatCoinType } from "@trustwallet/types";
 import { HttpClient } from "@angular/common/http";
 import BigNumber from "bignumber.js";
 import { Utils } from "@trustwallet/api";

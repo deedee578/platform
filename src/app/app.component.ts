@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable, of } from "rxjs";
+import { Observable } from "rxjs";
 import { Router } from "@angular/router";
 import { filter, map, startWith } from "rxjs/operators";
 import { Location } from "@angular/common";

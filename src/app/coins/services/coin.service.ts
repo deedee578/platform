@@ -12,4 +12,8 @@ export interface CoinService {
   getAddress(): Observable<string>;
   stake(account: any, to: string, amount: string): Observable<string>;
   unstake(account: any, to: string, amount: string): Observable<string>;
+  unstake(account: any, to: string, amount: string): Observable<string>;
+  getStakePendingBalance(): Observable<BigNumber>;
+  getStakingRewards(): Observable<BigNumber>;
+  getUnstakingDate(): Observable<Date>;
 }

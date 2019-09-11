@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { CoinService } from "../../coins/services/coin.service";
-import { Observable, of } from "rxjs";
+import { of } from "rxjs";
 import { ServiceFactoryService } from "./service-factory.service";
 import { Coins } from "../../coins/coins";
 

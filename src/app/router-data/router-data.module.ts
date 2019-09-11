@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
+import { NgModule } from "@angular/core";
 import { RouteDataProvider } from "./services/route-data-provider";
 
 @NgModule({

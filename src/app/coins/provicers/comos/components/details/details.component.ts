@@ -1,12 +1,10 @@
 import { Component, OnDestroy } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { CosmosService } from "../../services/cosmos.service";
-import { combineAll, map, switchMap } from "rxjs/operators";
+import { map, switchMap } from "rxjs/operators";
 import { Observable, Subscription } from "rxjs";
 import { BlockatlasValidator } from "@trustwallet/rpc/lib/blockatlas/models/BlockatlasValidator";
 import { CosmosDelegation } from "@trustwallet/rpc/src/cosmos/models/CosmosDelegation";
-import { AccountService } from "../../../../../shared/services/account.service";
-import { CoinType } from "@trustwallet/types";
 
 @Component({
   selector: "app-details",

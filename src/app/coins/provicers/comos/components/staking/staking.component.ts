@@ -3,7 +3,6 @@ import { Observable, of } from "rxjs";
 import { CosmosService } from "../../services/cosmos.service";
 import { catchError, map, switchMap } from "rxjs/operators";
 import { LoadersCSS } from "ngx-loaders-css";
-import { AccountService } from "../../../../../shared/services/account.service";
 import { ActivatedRoute } from "@angular/router";
 import { CosmosAccount } from "@trustwallet/rpc";
 import { StakeAction } from "../../../../coin-provider-config";

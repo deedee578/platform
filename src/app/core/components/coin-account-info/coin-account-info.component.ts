@@ -1,8 +1,6 @@
 import { Component } from "@angular/core";
-import { CosmosService } from "../../../coins/provicers/comos/services/cosmos.service";
 import { combineLatest, Observable } from "rxjs";
 import { map, shareReplay } from "rxjs/operators";
-import { AccountService } from "../../../shared/services/account.service";
 import { CoinsReceiverService } from "../../../shared/services/coins-receiver.service";
 
 @Component({

@@ -21,7 +21,7 @@
     "@angular/platform-browser-dynamic": "^8.2.4",
     "@angular/router": "^8.2.4",
     "@trustwallet/provider": "^0.1.7",
-    "@trustwallet/rpc": "^0.1.7",
+    "@trustwallet/rpc": "^0.1.8",
     "@trustwallet/api": "^0.1.7",
     "bignumber.js": "^9.0.0",
     "core-js": "^2.5.4",

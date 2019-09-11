@@ -1,11 +1,8 @@
-import { HttpClientModule } from "@angular/common/http";
-import { CommonModule } from "@angular/common";
-import { NgxLoadersCssModule } from "ngx-loaders-css";
 import { CosmosProviderComponent } from "./components/cosmos-provider/cosmos-provider.component";
 import { DetailsComponent } from "./components/details/details.component";
 import { StakingComponent } from "./components/staking/staking.component";
 import { NgModule } from "@angular/core";
-import { Router, RouterModule } from "@angular/router";
+import { RouterModule } from "@angular/router";
 import { CosmosProviderRoutingModule } from "./cosmos-provider-routing.module";
 import { CosmosService } from "./services/cosmos.service";
 import { RouterDataModule } from "../../../router-data/router-data.module";
