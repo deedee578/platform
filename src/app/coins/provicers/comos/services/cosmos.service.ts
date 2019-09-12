@@ -31,6 +31,7 @@ import { CoinType } from "@trustwallet/types";
 import { TrustProvider } from "@trustwallet/provider/lib";
 import { CosmosRpcService } from "./cosmos-rpc.service";
 import { CosmosUnboundInfoService } from "./cosmos-unbound-info.service";
+import { CosmosStakingInfo } from "@trustwallet/rpc/lib/cosmos/models/CosmosStakingInfo";
 
 // TODO: There is plenty of old boilerplate here yet. Need to be refactored.
 
@@ -93,7 +94,7 @@ export class CosmosService implements CoinService {
   }
 
   private requestBalance(address: string): Observable<BigNumber> {
-    return this.getAccountOnce$(address).pipe(
+    return this.getAccountOnce(address).pipe(
       map((account: CosmosAccount) => {
         // TODO: add type annotation once it exported by library (Coin)
         const balances = (account as CosmosAccount).coins;
@@ -268,7 +269,7 @@ export class CosmosService implements CoinService {
     );
   }
 
-  getAccountOnce$(address: string): Observable<CosmosAccount> {
+  getAccountOnce(address: string): Observable<CosmosAccount> {
     return this.cosmosRpc.rpc.pipe(
       switchMap(rpc => from(rpc.getAccount(address)))
     );
@@ -317,17 +318,21 @@ export class CosmosService implements CoinService {
     to: string,
     amount: string
   ): Observable<string> {
-    const txSkeleton = this.getCosmosTxSkeleton(account);
     const payload = this.getTxPayload(account.address, to, amount);
-
-    const tx = {
-      ...txSkeleton,
-      ["stakeMessage"]: {
-        ...payload
-      }
-    };
-
-    return from(TrustProvider.signTransaction(CoinType.cosmos, tx));
+    return this.getCosmosTxSkeleton(account)
+      .pipe(
+        map(txSkeleton =>
+          ({
+            ...txSkeleton,
+            ["stakeMessage"]: {
+              ...payload
+            }
+          })
+        ),
+        switchMap(tx =>
+          from(TrustProvider.signTransaction(CoinType.cosmos, tx))
+        )
+      );
   }
 
   unstake(
@@ -335,17 +340,19 @@ export class CosmosService implements CoinService {
     to: string,
     amount: string
   ): Observable<string> {
-    const txSkeleton = this.getCosmosTxSkeleton(account);
     const payload = this.getTxPayload(account.address, to, amount);
-
-    const tx = {
-      ...txSkeleton,
-      ["unstakeMessage"]: {
-        ...payload
-      }
-    };
-
-    return from(TrustProvider.signTransaction(CoinType.cosmos, tx));
+    return this.getCosmosTxSkeleton(account)
+      .pipe(
+        map(txSkeleton =>
+          ({
+            ...txSkeleton,
+            ["unstakeMessage"]: {
+              ...payload
+            }
+          })
+        ),
+        switchMap(tx => from(TrustProvider.signTransaction(CoinType.cosmos, tx)))
+      );
   }
 
   getStakePendingBalance(): Observable<BigNumber> {
@@ -358,5 +365,9 @@ export class CosmosService implements CoinService {
 
   getUnstakingDate(): Observable<Date> {
     return this.cosmosUnboundInfoService.getReleaseDate();
+  }
+
+  getStakingInfo(): Observable<CosmosStakingInfo> {
+    return this.cosmosUnboundInfoService.getStakingInfo();
   }
 }

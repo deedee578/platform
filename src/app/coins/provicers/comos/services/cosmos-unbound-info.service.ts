@@ -8,6 +8,7 @@ import { fromPromise } from "rxjs/internal-compatibility";
 import BigNumber from "bignumber.js";
 import { CosmosUnbond } from "@trustwallet/rpc/lib/cosmos/models/CosmosUnbond";
 import { CosmosUtils } from "@trustwallet/rpc";
+import { CosmosStakingInfo } from "@trustwallet/rpc/lib/cosmos/models/CosmosStakingInfo";
 
 @Injectable({
   providedIn: "root"
@@ -30,43 +31,27 @@ export class CosmosUnboundInfoService {
   }
 
   getReleaseDate(): Observable<Date> {
-    return this.getUnbonds().pipe(
-      map(unbounds => {
-        return unbounds.reduce(
-          (acc, unbond) =>
-            Math.max(
-              acc,
-              unbond.entries.reduce(
-                (acc, entry) => Math.max(acc, entry.completionTime.getTime()),
-                0
-              )
-            ),
-          0
-        );
-      }),
-      map(max => new Date(max))
+    return combineLatest([
+      this.cosmosRpcService.rpc,
+      this.accountService.getAddress(CoinType.cosmos)
+    ]).pipe(
+      switchMap(([rpc, address]) =>
+        fromPromise(rpc.unstakingReleaseDate(address))
+      )
+    );
+  }
+
+  getStakingInfo(): Observable<CosmosStakingInfo> {
+    return this.cosmosRpcService.rpc.pipe(
+      switchMap(rpc => fromPromise(rpc.getStakingParameters()))
     );
   }
 
   getPendingBalance(): Observable<BigNumber> {
-    // TODO: temp fix until Webcore fix merged
-    const f = (entries: any[]) => {
-      return entries.filter(
-        entry => entry.completionTime.getTime() > Date.now()
-      );
-    };
     return this.getUnbonds().pipe(
       map(unbounds => {
         return unbounds.reduce(
-          (acc, unbound) =>
-            acc.plus(
-              CosmosUtils.toAtom(
-                f(unbound.entries).reduce(
-                  (acc, entry) => acc.plus(entry.balance),
-                  new BigNumber(0)
-                )
-              )
-            ),
+          (acc, unbound) => acc.plus(acc.plus(unbound.getPendingBalance())),
           new BigNumber(0)
         );
       })

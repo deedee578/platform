@@ -22,6 +22,7 @@ export class MainComponent implements OnInit {
   addresses: { [key: string]: Observable<number> };
   pending: { [key: string]: Observable<BigNumber> };
   releaseDate: { [key: string]: Observable<Date> };
+  info: { [key: string]: Observable<any> };
   blockchains = Coins;
 
   constructor(
@@ -61,6 +62,15 @@ export class MainComponent implements OnInit {
         [coin.network]: this.coinsReceiverService.blochchainServices[
           index
         ].getUnstakingDate()
+      }),
+      {}
+    );
+    this.info = Coins.reduce(
+      (annuals, coin, index) => ({
+        ...annuals,
+        [coin.network]: this.coinsReceiverService.blochchainServices[
+          index
+        ].getStakingInfo()
       }),
       {}
     );

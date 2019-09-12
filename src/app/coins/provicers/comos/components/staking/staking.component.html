@@ -1,25 +1,42 @@
 <div class="row small">
-
   <div class="card col-12 p-0">
     <div class="card-body">
       <div class="col-12 text-center">
         <div>
-
           <div *ngIf="!input.value" class="pb-3">
-            <h5>{{isStakeAction ? 'Enter amount to stake' : 'Enter amount to withdraw'}}</h5>
+            <h5>
+              {{
+                isStakeAction
+                  ? "Enter amount to stake"
+                  : "Enter amount to withdraw"
+              }}
+            </h5>
+          </div>
+
+          <div *ngIf="!isStakeAction">
+            <span *ngIf="info | async; let info"
+              >It takes {{ info.timeFrame.day }} days to withdraw your
+              funds</span
+            >
           </div>
 
           <div *ngIf="input.value" class="pb-3">
-            <h5>{{isStakeAction ? 'You will stake' : 'You will withdraw'}}</h5>
-            <h5>{{input.value + ' ATOMs'}}</h5>
+            <h5>
+              {{ isStakeAction ? "You will stake" : "You will withdraw" }}
+            </h5>
+            <h5>{{ input.value + " ATOMs" }}</h5>
           </div>
-
         </div>
 
         <div class="input-group input-group-lg">
-          <input (input)="inputElement.nativeElement.value = input.value" #input placeholder="Amount in ATOM"
-                 type="number"
-                 class="form-control" aria-label="Large">
+          <input
+            (input)="inputElement.nativeElement.value = input.value"
+            #input
+            placeholder="Amount in ATOM"
+            type="number"
+            class="form-control"
+            aria-label="Large"
+          />
           <!--
           <div class="input-group-append">
             <span class="btn btn-outline-primary">MAX</span>
@@ -27,17 +44,27 @@
           -->
         </div>
         <div *ngIf="isLoaded" class="col-12 text-center p-0">
-          <button (click)="isStakeAction ? stake() : unStake()"
-                  [ngClass]="{'btn-primary': isStakeAction, 'btn-outline-primary': !isStakeAction}"
-                  class="btn btn-lg mt-4 mb-4 col-12">{{isStakeAction ? 'STAKE' : 'UNSTAKE'}}
+          <button
+            (click)="isStakeAction ? stake() : unStake()"
+            [ngClass]="{
+              'btn-primary': isStakeAction,
+              'btn-outline-primary': !isStakeAction
+            }"
+            class="btn btn-lg mt-4 mb-4 col-12"
+          >
+            {{ isStakeAction ? "STAKE" : "UNSTAKE" }}
           </button>
         </div>
 
         <div *ngIf="!isLoaded" class="col-12 text-center pt-4 pb-4">
-          <loaders-css [loader]="loader" [scale]="1" [bgColor]="bgColor" color="#2a63a0"></loaders-css>
+          <loaders-css
+            [loader]="loader"
+            [scale]="1"
+            [bgColor]="bgColor"
+            color="#2a63a0"
+          ></loaders-css>
         </div>
       </div>
     </div>
   </div>
-
 </div>
