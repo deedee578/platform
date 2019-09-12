@@ -5,12 +5,13 @@
         <h6 class="table-title p-2 m-0">Supplying</h6>
         <ng-template ngFor let-item [ngForOf]="myStakeHolders$ | async" let-i="index">
           <div (click)="navigateToMyStakeHoldersList(item)" class="row row-container pb-1 pt-1">
-            <div class="js-l col-5 col-sm-7 pl-1">
+            <div class="col-8 pl-1">
               <img class="m-2 row-logo" src="{{ item.info.image }}" alt="cosmos"/>
-              {{ item.info.name }}
+              <div class="js-l">
+              <span>{{ item.info.name }}</span>
+              <span class="success">{{ item.reward.annual | number: "1.2-2" }}%</span>
+              </div>
             </div>
-
-            <div class="col-3 col-xs-2 success">{{ item.reward.annual | number: "1.2-2" }}%</div>
             <div class="col-auto js-r pr-1 mr-3">
               <span>{{ item.amount }} {{ item.coin.currencySymbol }}</span>
             </div>

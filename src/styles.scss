@@ -12,4 +12,27 @@ body {
 
 .success {
   color: $success;
+  display: block;
+}
+
+// btns
+.btn-primary {
+  background-color: $primary;
+  border: 1px solid $primary;
+}
+
+.btn-primary:hover {
+  background-color: $primary-desat;
+  border: 1px solid $primary;
+}
+
+.btn-secondary{
+  color: $primary;
+  background-color: $white;
+  border: 1px solid $border;
+}
+.btn-secondary:hover{
+  color: $primary;
+  background-color: $gray-100;
+  border: 1px solid $border;
 }

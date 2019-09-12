@@ -9,16 +9,15 @@
 }
 
 .js-l {
-  display: flex;
+  display: inline-block;
   align-items: center;
+  vertical-align: middle;
 }
 
 .js-r {
   position: absolute;
   right: 0;
 }
-
-
 
 .js-c {
   justify-self: center;
@@ -29,9 +28,8 @@
 }
 
 .description {
-    font-size: 17px;
-    margin-left: 0.2em;
-    margin-right: 0.2em;
+    font-size: 16px;
+    line-height: 26px;
 }
 
 .balances-box {
@@ -49,8 +47,4 @@
 
 .text-gray {
   color: #7F7F7F;
-}
-
-.apr {
-  display: block;
 }

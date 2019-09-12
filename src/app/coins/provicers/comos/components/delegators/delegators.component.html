@@ -4,11 +4,14 @@
       <h6 class="card-title table-title p-2 m-0"> All {{blockchain}} markets</h6>
 
       <ng-template ngFor let-item [ngForOf]="(validators$ | async)" let-i="index">
-        <div (click)="navigateToMyStakeHoldersList(item)" class="row-container pl-1">
-          <img class="row-logo" src="{{item.info.image}}" alt="{{item.info.name}}">
-          <span class="js-l">{{item.info.name}}</span>
-          <span>{{item.reward.annual.toFixed(2)}}%</span>
-          <span class="js-c"><i class="fas fa-chevron-right"></i></span>
+        <div (click)="navigateToMyStakeHoldersList(item)" class="row row-container pb-1 pt-1">
+          <div class="col-6 col-auto mr-auto pl-1">
+          <img class="m-2 row-logo" src="{{item.info.image}}" alt="{{item.info.name}}">
+          <span>{{item.info.name}}</span>
+          </div>
+          <div class="col-auto pr-1 mr-3">
+          <span class="success">{{item.reward.annual.toFixed(2)}}%</span>
+          </div>
         </div>
         <tr>
       </ng-template>

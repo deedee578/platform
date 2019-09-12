@@ -1,13 +1,9 @@
 .row-container {
-  grid-template-columns: 50px 1fr 80px 30px;
-  grid-gap: 10px;
-  display: grid;
-  justify-items: right;
   align-items: center;
-  margin: 14px 0 14px 0;
+  margin: 0;
 }
 
-.row-container img {
-  border-radius: 10px;
-  height: 34px;
+.row-container:hover {
+  cursor: pointer;
+  background-color: #F9FAFB;
 }
