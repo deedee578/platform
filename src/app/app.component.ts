@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { Router } from "@angular/router";
 import { filter, map, startWith } from "rxjs/operators";
 import { Location } from "@angular/common";
+import {TrustProvider} from "@trustwallet/provider/lib";
 
 @Component({
   selector: "app-root",
@@ -23,6 +24,10 @@ export class AppComponent {
       map((event: any) => event.url !== "/"),
       startWith(false)
     );
+  }
+
+  get isTrustProviderAvailable(): boolean {
+    return TrustProvider.isAvailable;
   }
 
   goBack() {

@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { NgxLoadersCssModule } from "ngx-loaders-css";
 import { HttpClientModule } from "@angular/common/http";
-import { LoadingButtonComponent } from "./loading-button/loading-button";
+import { LoadingButtonComponent } from "./loading-button/loading-button.component";
 
 const components = [
   LoadingButtonComponent

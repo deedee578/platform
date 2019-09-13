@@ -3,8 +3,8 @@ import {LoadersCSS} from "ngx-loaders-css";
 
 @Component({
   selector: "loading-button",
-  templateUrl: "./loading-button.html",
-  styleUrls: ["./loading-button.scss"]
+  templateUrl: "./loading-button.component.html",
+  styleUrls: ["./loading-button.component.scss"]
 })
 export class LoadingButtonComponent {
   @Input() loading = false;

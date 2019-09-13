@@ -1,0 +1,26 @@
+div {
+  color: white;
+}
+
+.download-button {
+  width: 160px;
+  height: 50px;
+  overflow: hidden;
+  display: block;
+}
+
+.download-apple {
+  background: url('/assets/images/download_buttons.svg') 0px -50px;
+}
+
+.download-android {
+  background: url('/assets/images/download_buttons.svg') 0px -100px;
+}
+
+.download-apk {
+  background: url('/assets/images/download_buttons.svg');
+}
+
+.message {
+  border-bottom: 1px solid white;
+}

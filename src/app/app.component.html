@@ -1,3 +1,4 @@
+<div *ngIf="isTrustProviderAvailable">
 <div class="text-center d-flex justify-content-around header-bg pt-2">
   <div *ngIf="showBackButton$ | async; else logo">
     <div style=" height: 40px; margin-left: -5px"
@@ -23,4 +24,9 @@
   <div class="container">
     <router-outlet></router-outlet>
   </div>
+</div>
+</div>
+
+<div *ngIf="!isTrustProviderAvailable">
+  <use-trust-wallet></use-trust-wallet>
 </div>
