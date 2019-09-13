@@ -1,35 +1,35 @@
-<div class="container card media-small">
+<div class=" header-cards media-small">
   <div class="balances-box card-body p-0 d-flex justify-content-between">
     <div>
-      <div class="text-muted">Available Balance</div>
-      <div class="text-muted">Supply Balance</div>
+      <div class="text-alpha text-left ml-2">Available to stake</div>
+      <div class="text-alpha text-left ml-2">Supply Balance</div>
     </div>
 
-    <div>
-      <div>
+    <div class="text-right">
+      <h4 class="mr-2">
         {{ ((fiatBalance$ | async) | currency:'USD':'symbol':'1.2-2') || '...' }}
-      </div>
-      <div>
+      </h4>
+      <h4 class="mr-2">
         {{ ((fiatStaked$ | async) | currency:'USD':'symbol':'1.2-2') || '...' }}
-      </div>
+      </h4>
     </div>
   </div>
 </div>
 
 <div class="media-big">
   <div style="display:grid; grid-template-columns: 1fr 1fr; grid-gap:0.5em">
-    <div class="container card">
-      <div class="text-muted">Available Balance</div>
-      <div>
+    <div class="header-cards">
+      <div class="text-alpha">Available to stake</div>
+      <h4>
         {{ ((fiatBalance$ | async) | currency:'USD':'symbol':'1.2-2') || '...' }}
-      </div>
+      </h4>
     </div>
 
-    <div class="container card">
-      <div class="text-muted">Supply Balance</div>
-      <div>
+    <div class="header-cards">
+      <div class="text-alpha">Supply Balance</div>
+      <h4>
         {{ ((fiatStaked$ | async) | currency:'USD':'symbol':'1.2-2') || '...' }}
-      </div>
+      </h4>
     </div>
   </div>
 </div>

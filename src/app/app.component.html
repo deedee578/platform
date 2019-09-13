@@ -1,25 +1,18 @@
-<div class="text-center d-flex justify-content-around header-bg pt-2">
-  <div *ngIf="showBackButton$ | async; else logo">
-    <div style=" height: 40px; margin-left: -5px"
-         class="text-center col-12 d-flex justify-content-around pb-2 pt-1">
-      <div (click)="goBack()"><i class="fas fa-arrow-left fa-2x white"></i></div>
-    </div>
+<div class="text-center d-flex justify-content-around header-bg p-2">
+
+  <div class="logo">
+    <img src="assets/images/trust_logo.svg" alt="trust">
   </div>
 
-  <ng-template #logo>
-    <div style="width: 50px;display: inline-block; height: 40px">
-      <img src="assets/images/trust_logo.svg" alt="trust">
-    </div>
-  </ng-template>
 </div>
 
-<div class="header-bg p-2">
-  <div class="container p-0">
-      <app-coin-account-info></app-coin-account-info>
+<div class="header-bg pt-2 pb-5">
+  <div class="container">
+    <app-coin-account-info></app-coin-account-info>
   </div>
 </div>
 
-<div class="p-2">
+<div class="override p-2">
   <div class="container">
     <router-outlet></router-outlet>
   </div>
