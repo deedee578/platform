@@ -50,10 +50,10 @@ export class CosmosUnboundInfoService {
   getPendingBalance(): Observable<BigNumber> {
     return this.getUnbonds().pipe(
       map(unbounds => {
-        return unbounds.reduce(
+        return unbounds ? unbounds.reduce(
           (acc, unbound) => acc.plus(acc.plus(unbound.getPendingBalance())),
           new BigNumber(0)
-        );
+        ) : null;
       })
     );
   }
