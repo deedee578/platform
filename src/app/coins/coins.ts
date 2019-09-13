@@ -5,7 +5,7 @@ import {
   CosmosChainId,
   CosmosCoinConfig,
   CosmosProviderConfig
-} from "./provicers/comos/cosmos.descriptor";
+} from "./providers/cosmos/cosmos.descriptor";
 
 export const Coins: CoinProviderConfig[] = [
   CoinDescriptor<CosmosProviderConfig>({
