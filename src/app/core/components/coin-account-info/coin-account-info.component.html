@@ -1,8 +1,8 @@
-<div class=" header-cards media-small">
+<div class="mt-2 header-cards media-small">
   <div class="balances-box card-body p-0 d-flex justify-content-between">
     <div>
-      <div class="text-alpha text-left ml-2">Available to stake</div>
-      <div class="text-alpha text-left ml-2">Supply Balance</div>
+      <div class="text-alpha text-left ml-2">Available To Stake</div>
+      <div class="text-alpha text-left ml-2">Staked Balance</div>
     </div>
 
     <div class="text-right">
@@ -19,14 +19,14 @@
 <div class="media-big">
   <div style="display:grid; grid-template-columns: 1fr 1fr; grid-gap:0.5em">
     <div class="header-cards">
-      <div class="text-alpha">Available to stake</div>
+      <div class="text-alpha">Available To Stake</div>
       <h4>
         {{ ((fiatBalance$ | async) | currency:'USD':'symbol':'1.2-2') || '...' }}
       </h4>
     </div>
 
     <div class="header-cards">
-      <div class="text-alpha">Supply Balance</div>
+      <div class="text-alpha">Staked Balance</div>
       <h4>
         {{ ((fiatStaked$ | async) | currency:'USD':'symbol':'1.2-2') || '...' }}
       </h4>

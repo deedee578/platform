@@ -66,7 +66,7 @@ export class UnstakingComponent {
   }
 
   congratulate(sum: number) {
-    const modalRef = this.modalService.open(SuccessPopupComponent);
+    const modalRef = this.modalService.open(SuccessPopupComponent, { centered: true });
     modalRef.componentInstance.text = `You have successfully withdrawn ${sum} ATOMs`;
     modalRef.result.then(
       data => {

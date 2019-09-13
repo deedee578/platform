@@ -65,7 +65,7 @@ export class StakingComponent {
   }
 
   congratulate(sum: number) {
-    const modalRef = this.modalService.open(SuccessPopupComponent);
+    const modalRef = this.modalService.open(SuccessPopupComponent, { centered: true });
     modalRef.componentInstance.text = `You have successfully staked ${sum} ATOMs`;
     modalRef.result.then(
       data => {
