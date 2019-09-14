@@ -7,7 +7,7 @@ body {
 }
 
 .override{
-  top: -48px;
+  top: -45px;
   position: relative;
 }
 
@@ -18,6 +18,10 @@ body {
 .success {
   color: $success;
   display: block;
+}
+
+.icon-color{
+  color: $icon;
 }
 
 .header-cards{
@@ -49,4 +53,8 @@ body {
   color: $primary;
   background-color: $gray-100;
   border: 1px solid $border;
+}
+
+.row-container {
+  border-top: 0.5px solid $border;
 }

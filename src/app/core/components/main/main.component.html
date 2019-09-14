@@ -2,8 +2,18 @@
   <div class="col-12 p-0" *ngIf="stakeHolders && stakeHolders.length">
     <div class="card">
       <div class="card-body p-0">
+<<<<<<< Updated upstream
         <h6 class="ml-3 mt-3 mb-1">Staked</h6>
         <ng-template ngFor let-item [ngForOf]="stakeHolders" let-i="index">
+=======
+        <h6 class="m-2 ml-3">Staked</h6>
+        <ng-template
+          ngFor
+          let-item
+          [ngForOf]="myStakeHolders$ | async"
+          let-i="index"
+        >
+>>>>>>> Stashed changes
           <div
             (click)="navigateToMyStakeHoldersList(item)"
             class="row row-container pb-1 pt-1"
@@ -23,6 +33,7 @@
             </div>
             <div class="col-auto js-r pr-1 mr-3">
               <span>{{ item.amount }} {{ item.coin.currencySymbol }}</span>
+              <span class="js-l"><i class="ml-2 text-muted fas fa-chevron-right"></i></span>
             </div>
           </div>
         </ng-template>
@@ -35,7 +46,7 @@
   <div class="col-12 p-0">
     <div class="card">
       <div class="card-body p-0">
-        <h6 class="ml-3 mt-3 mb-1">Coins</h6>
+        <h6 class="m-2 ml-3">Coins</h6>
         <ng-template ngFor let-item [ngForOf]="blockchains" let-i="index">
           <div
             (click)="navigateToPosDelegatorsList(item)"
@@ -73,9 +84,8 @@
               </div>
             </div>
             <div class="col-auto pr-1 mr-3">
-              <span class="success"
-                >{{ annual | number: "1.2-2" }}{{ annual && "%" }}</span
-              >
+              <span class="success mr-3"
+                >{{ annual | number: "1.2-2" }}{{ annual && "%" }}<span class="js-r"><i class="mr-1 text-muted fas fa-chevron-right"></i></span></span>
             </div>
           </div>
         </ng-template>

@@ -1,7 +1,7 @@
 <div class="row small">
   <div class="card col-12 p-0">
     <div class="card-body p-0">
-      <h6 class="card-title ml-3 mt-3 mb-1"> All {{blockchain}} markets</h6>
+      <h6 class="card-title m-2 ml-3"> All {{blockchain}} markets</h6>
 
       <ng-template ngFor let-item [ngForOf]="(validators$ | async)" let-i="index">
         <div (click)="navigateToMyStakeHoldersList(item)" class="row row-container pb-1 pt-1">
@@ -10,7 +10,7 @@
           <span>{{item.info.name}}</span>
           </div>
           <div class="col-auto pr-1 mr-3">
-          <span class="success">{{item.reward.annual.toFixed(2)}}%</span>
+          <span class="success mr-3">{{item.reward.annual.toFixed(2)}}% <span class="js-r"><i class="mr-1 text-muted fas fa-chevron-right"></i></span></span>
           </div>
         </div>
         <tr>
