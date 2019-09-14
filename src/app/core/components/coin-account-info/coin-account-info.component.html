@@ -17,19 +17,17 @@
 </div>
 
 <div class="media-big">
-  <div style="display:grid; grid-template-columns: 1fr 1fr; grid-gap:0.5em">
-    <div class="header-cards">
+    <div class="header-cards cards-big">
       <div class="text-alpha">Available To Stake</div>
       <h4>
         {{ ((fiatBalance$ | async) | currency:'USD':'symbol':'1.2-2') || '...' }}
       </h4>
     </div>
 
-    <div class="header-cards">
+    <div class="header-cards cards-big">
       <div class="text-alpha">Staked Balance</div>
       <h4>
         {{ ((fiatStaked$ | async) | currency:'USD':'symbol':'1.2-2') || '...' }}
       </h4>
     </div>
-  </div>
 </div>
