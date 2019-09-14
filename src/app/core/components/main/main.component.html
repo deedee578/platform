@@ -3,27 +3,13 @@
     <div class="card">
       <div class="card-body p-0">
         <h6 class="m-2 ml-3">Staked</h6>
-        <ng-template
-          ngFor
-          let-item
-          [ngForOf]="myStakeHolders$ | async"
-          let-i="index"
-        >
-          <div
-            (click)="navigateToMyStakeHoldersList(item)"
-            class="row row-container pb-1 pt-1"
-          >
+        <ng-template ngFor let-item [ngForOf]="myStakeHolders$ | async" let-i="index">
+          <div (click)="navigateToMyStakeHoldersList(item)" class="row row-container pb-1 pt-1">
             <div class="col-8 pl-2">
-              <img
-                class="m-2 row-logo"
-                src="{{ item.info.image }}"
-                alt="cosmos"
-              />
+              <img class="m-2 row-logo" src="{{ item.info.image }}" alt="cosmos" />
               <div class="js-l">
                 <span>{{ item.info.name }}</span>
-                <span class="success"
-                  >{{ item.reward.annual | number: "1.2-2" }}%</span
-                >
+                <span class="success">{{ item.reward.annual | number: "1.2-2" }}%</span>
               </div>
             </div>
             <div class="col-auto js-r pr-1 mr-3">
@@ -43,44 +29,31 @@
       <div class="card-body p-0">
         <h6 class="m-2 ml-3">Coins</h6>
         <ng-template ngFor let-item [ngForOf]="blockchains" let-i="index">
-          <div
-            (click)="navigateToPosDelegatorsList(item)"
-            class="row row-container pb-1 pt-1"
-            *ngIf="annuals[item.network] | async; let annual"
-          >
+          <div (click)="navigateToPosDelegatorsList(item)" class="row row-container pb-1 pt-1" *ngIf="annuals[item.network] | async; let annual">
             <div class="col-6 col-auto mr-auto pl-2">
-              <img
-                class="m-2 row-logo"
-                src="{{ item.iconUri }}"
-                alt="{{ item.currencyName }}"
-              />
+              <img class="m-2 row-logo" src="{{ item.iconUri }}" alt="{{ item.currencyName }}" />
               <span>{{ item.currencyName }} </span>
               <span class="text-muted">{{ item.currencySymbol }}</span>
               <div class="pl-2">
-                <ng-container
-                  *ngIf="addresses[item.network] | async; let address"
-                >
+                <ng-container *ngIf="addresses[item.network] | async; let address">
                   <div class="add-coin" *ngIf="address === true">
                     Add coin in Wallet menu
                   </div>
                 </ng-container>
-                <ng-container *ngIf="pending[item.network] | async; let pending"
-                  ><div *ngIf="pending > 0">
+                <ng-container *ngIf="pending[item.network] | async; let pending">
+                  <div *ngIf="pending > 0">
                     <span>
                       Pending: {{ pending }} {{ item.currencySymbol }}s
                     </span>
-                    <span
-                      *ngIf="releaseDate[item.network] | async; let releaseDate"
-                    >
+                    <span *ngIf="releaseDate[item.network] | async; let releaseDate">
                       to {{ releaseDate | date }}
                     </span>
-                  </div></ng-container
-                >
+                  </div>
+                </ng-container>
               </div>
             </div>
             <div class="col-auto pr-1 mr-3">
-              <span class="success mr-3"
-                >{{ annual | number: "1.2-2" }}{{ annual && "%" }}<span class="js-r"><i class="mr-1 text-muted fas fa-chevron-right"></i></span></span>
+              <span class="success mr-3">{{ annual | number: "1.2-2" }}{{ annual && "%" }}<span class="js-r"><i class="mr-1 text-muted fas fa-chevron-right"></i></span></span>
             </div>
           </div>
         </ng-template>
