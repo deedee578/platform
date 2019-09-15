@@ -1,15 +1,24 @@
-<div *ngIf="myStakeHolders$ | async" class="row small mb-2">
-  <div class="col-12 p-0">
+<div *ngIf="myStakeHolders$ | async; let stakeHolders" class="row small mb-2">
+  <div class="col-12 p-0" *ngIf="stakeHolders && stakeHolders.length">
     <div class="card">
       <div class="card-body p-0">
         <h6 class="m-2 ml-3">Staked</h6>
-        <ng-template ngFor let-item [ngForOf]="myStakeHolders$ | async" let-i="index">
-          <div (click)="navigateToMyStakeHoldersList(item)" class="row row-container pb-1 pt-1">
+        <ng-template ngFor let-item [ngForOf]="stakeHolders" let-i="index">
+          <div
+            (click)="navigateToMyStakeHoldersList(item)"
+            class="row row-container pb-1 pt-1"
+          >
             <div class="col-8 pl-2">
-              <img class="m-2 row-logo" src="{{ item.info.image }}" alt="cosmos" />
+              <img
+                class="m-2 row-logo"
+                src="{{ item.info.image }}"
+                alt="cosmos"
+              />
               <div class="js-l">
                 <span>{{ item.info.name }}</span>
-                <span class="success">{{ item.reward.annual | number: "1.2-2" }}%</span>
+                <span class="success"
+                  >{{ item.reward.annual | number: "1.2-2" }}%</span
+                >
               </div>
             </div>
             <div class="col-auto js-r pr-1 mr-3">
