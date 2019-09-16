@@ -6,12 +6,16 @@ div {
   display: none;
 }
 
+.cards-big{
+  display: inline-block;
+  margin-right: 60px;
+}
+
 @media screen and (min-width: 600px) {
   .media-small {
     display: none
   }
   .media-big {
-    display: block
+    display: inline-block;
   }
 }
-

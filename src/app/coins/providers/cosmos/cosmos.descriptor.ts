@@ -34,4 +34,6 @@ export interface CosmosProviderConfig
   extends CoinProviderConfig<CosmosService> {
   endpoint: string;
   chainId: (http: HttpClient) => Observable<string>;
+  gas: number;
+  fee: number;
 }

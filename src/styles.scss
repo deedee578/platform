@@ -1,9 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import 'assets/sass/variables';
+@import 'assets/sass/variables.scss';
 
 body {
     background-color: $light;
+}
+
+.override{
+  top: -45px;
+  position: relative;
 }
 
 .header-bg{
@@ -13,6 +18,19 @@ body {
 .success {
   color: $success;
   display: block;
+}
+
+.icon-color{
+  color: $icon;
+}
+
+.header-cards{
+  background: none;
+  color: $white;
+}
+
+.text-alpha{
+  color: $alpha-white;
 }
 
 // btns
@@ -35,4 +53,8 @@ body {
   color: $primary;
   background-color: $gray-100;
   border: 1px solid $border;
+}
+
+.row-container {
+  border-top: 0.5px solid $border;
 }

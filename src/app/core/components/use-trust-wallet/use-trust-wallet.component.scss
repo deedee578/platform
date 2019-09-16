@@ -23,4 +23,16 @@ div {
 
 .message {
   border-bottom: 1px solid white;
+  font-size: 12pt;
+  font-weight: 200;
+}
+
+#use-trust-message .open-trust {
+  color: white;
+  font-weight: 300;
+  font-size: 16pt;
+  padding: 5pt 40pt;
+  border: 1px solid white;
+  background-color: #ffffff10;
+  border-radius: 40pt;
 }

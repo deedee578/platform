@@ -1,13 +1,10 @@
 <button
-  (click)="click()"
+  (click)="clicked($event)"
   [disabled]="disabled || loading"
   class="btn btn-lg btn-primary mt-4 mb-4 col-12"
 >
   <span *ngIf="!loading"><ng-content></ng-content></span>
   <span *ngIf="loading">
-    <loaders-css
-      [scale]="1"
-      [loader]="loader"
-      color="fff"></loaders-css>
+    <loaders-css [scale]="1" [loader]="loader" color="fff"></loaders-css>
   </span>
 </button>

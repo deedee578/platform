@@ -1,15 +1,18 @@
-import {Component} from "@angular/core";
-import {Observable} from "rxjs";
-import {CosmosService} from "../../services/cosmos.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {StakeAction} from "../../../../coin-provider-config";
-import {CosmosStakingInfo} from "@trustwallet/rpc/lib/cosmos/models/CosmosStakingInfo";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {StakeValidator} from "../../validators/stake.validator";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {SuccessPopupComponent} from "../success-popup/success-popup.component";
-import {tap} from "rxjs/operators";
+import { Component, Inject } from "@angular/core";
+import { Observable } from "rxjs";
+import { CosmosService } from "../../services/cosmos.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { StakeAction } from "../../../../coin-provider-config";
+import { CosmosStakingInfo } from "@trustwallet/rpc/lib/cosmos/models/CosmosStakingInfo";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { StakeValidator } from "../../validators/stake.validator";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { SuccessPopupComponent } from "../../../../../shared/components/success-popup/success-popup.component";
+import { tap } from "rxjs/operators";
 import BigNumber from "bignumber.js";
+import { DialogsService } from "../../../../../shared/services/dialogs.service";
+import { CosmosConfigService } from "../../services/cosmos-config.service";
+import { CosmosProviderConfig } from "../../cosmos.descriptor";
 
 @Component({
   selector: "app-test",
@@ -26,34 +29,43 @@ export class StakingComponent {
   isLoading = false;
 
   constructor(
+    @Inject(CosmosConfigService)
+    private config: Observable<CosmosProviderConfig>,
     private cosmos: CosmosService,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private modalService: NgbModal,
+    private dialogService: DialogsService,
     private router: Router
   ) {
     this.myAddress = this.cosmos.getAddress();
     this.validatorId = activatedRoute.snapshot.params.validatorId;
     this.info = this.cosmos.getStakingInfo();
-    this.stakeForm = this.fb.group({
-      amount: ["", [], [StakeValidator(true, this.cosmos, this.validatorId)]]
+    const s = this.config.subscribe(config => {
+      this.stakeForm = this.fb.group({
+        amount: [
+          "",
+          [],
+          [StakeValidator(true, config, this.cosmos, this.validatorId)]
+        ]
+      });
     });
   }
 
   stake() {
-    if (this.isLoading) { return; }
+    if (this.isLoading) {
+      return;
+    }
 
     this.isLoading = true;
-    const amount = new BigNumber(this.stakeForm.get("amount").value)
-      .times(new BigNumber(1000000));
+    const amount = new BigNumber(this.stakeForm.get("amount").value).times(
+      new BigNumber(1000000)
+    );
 
     this.cosmos
       .sendTx(StakeAction.STAKE, this.validatorId, amount)
-      .pipe(tap(() => this.isLoading = false, e => this.isLoading = false))
+      .pipe(tap(() => (this.isLoading = false), e => (this.isLoading = false)))
       .subscribe(_ => {
         this.congratulate(this.stakeForm.get("amount").value);
-      }, e => {
-        alert(e);
       });
   }
 
@@ -65,8 +77,9 @@ export class StakingComponent {
   }
 
   congratulate(sum: number) {
-    const modalRef = this.modalService.open(SuccessPopupComponent);
-    modalRef.componentInstance.text = `You have successfully staked ${sum} ATOMs`;
+    const modalRef = this.dialogService.showSuccess(
+      `You have successfully staked ${sum} ATOMs`
+    );
     modalRef.result.then(
       data => {
         this.router.navigate([`/`]);

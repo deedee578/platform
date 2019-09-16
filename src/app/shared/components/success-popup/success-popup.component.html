@@ -1,0 +1,23 @@
+<div class="mb-3 p-2">
+  <div class="col-12 text-right mt-3">
+    <img src="assets/images/close.svg"
+         aria-label="Close"
+         (click)="activeModal.dismiss('Cross click')" aria-hidden="true">
+  </div>
+  <div class="pb-4 text-center">
+    <div>
+      <img class="mascot mb-3" src="assets/images/mascot-thumbsup.svg">
+    </div>
+    <div>
+      <span class="text-muted">{{ text }}</span>
+    </div>
+  </div>
+  <div class="col-12 text-center">
+    <button
+      type="button"
+      class="btn btn-lg btn-block btn-primary"
+      (click)="activeModal.close('Close click')">
+      OK
+    </button>
+  </div>
+</div>

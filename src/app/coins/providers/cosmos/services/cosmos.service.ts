@@ -114,7 +114,9 @@ export class CosmosService implements CoinService {
         const shares =
           (delegations && delegations.map((d: CosmosDelegation) => d.shares)) ||
           [];
-        return BigNumber.sum(...shares);
+        return shares && shares.length
+          ? BigNumber.sum(...shares)
+          : new BigNumber(0);
       })
     );
   }
@@ -204,7 +206,7 @@ export class CosmosService implements CoinService {
   private getTxPayload(
     addressFrom: string,
     addressTo: string,
-    amount: BigNumber,
+    amount: BigNumber
   ): any {
     return {
       delegatorAddress: addressFrom,
@@ -218,8 +220,10 @@ export class CosmosService implements CoinService {
 
   private getCosmosTxSkeleton(account: CosmosAccount): Observable<any> {
     return this.config.pipe(
-      switchMap(config => config.chainId(this.http)),
-      map(chain => ({
+      switchMap(config =>
+        combineLatest([config.chainId(this.http), of(config)])
+      ),
+      map(([chain, config]) => ({
         typePrefix: "auth/StdTx",
         accountNumber: account.accountNumber,
         sequence: account.sequence,
@@ -231,7 +235,7 @@ export class CosmosService implements CoinService {
               amount: this.fee.toFixed()
             }
           ],
-          gas: "200000"
+          gas: config.gas
         }
       }))
     );
@@ -317,7 +321,7 @@ export class CosmosService implements CoinService {
   stake(
     account: CosmosAccount,
     to: string,
-    amount: BigNumber,
+    amount: BigNumber
   ): Observable<string> {
     const payload = this.getTxPayload(account.address, to, amount);
     return this.getCosmosTxSkeleton(account).pipe(
@@ -370,7 +374,11 @@ export class CosmosService implements CoinService {
     );
   }
 
-  sendTx(action: StakeAction, addressTo: string, amount: BigNumber): Observable<CosmosBroadcastResult> {
+  sendTx(
+    action: StakeAction,
+    addressTo: string,
+    amount: BigNumber
+  ): Observable<CosmosBroadcastResult> {
     return this.getAddress().pipe(
       switchMap(address => {
         return this.getAccountOnce(address);

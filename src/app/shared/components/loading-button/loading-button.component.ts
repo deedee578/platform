@@ -1,5 +1,5 @@
-import {Component, Input} from "@angular/core";
-import {LoadersCSS} from "ngx-loaders-css";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { LoadersCSS } from "ngx-loaders-css";
 
 @Component({
   selector: "loading-button",
@@ -9,8 +9,12 @@ import {LoadersCSS} from "ngx-loaders-css";
 export class LoadingButtonComponent {
   @Input() loading = false;
   @Input() disabled = false;
-  @Input() click: () => void;
+  @Output() click: EventEmitter<any> = new EventEmitter();
 
   loader: LoadersCSS = "ball-beat";
   constructor() {}
+
+  clicked(event: any) {
+    this.click.emit(event);
+  }
 }

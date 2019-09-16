@@ -3,9 +3,12 @@ import { FormControl } from "@angular/forms";
 import { timer } from "rxjs";
 import { first, map, switchMap } from "rxjs/operators";
 import BigNumber from "bignumber.js";
+import { CosmosProviderConfig } from "../cosmos.descriptor";
+import { CosmosUtils } from "@trustwallet/rpc/lib";
 
 export const StakeValidator = (
   isStake: boolean,
+  config: CosmosProviderConfig,
   cosmos: CosmosService,
   validatorId: string
 ) => {
@@ -24,9 +27,11 @@ export const StakeValidator = (
         }
 
         const val = new BigNumber(input.value);
-        const minValue = new BigNumber(1);
+        const minValue = CosmosUtils.toAtom(
+          new BigNumber(config.gas + config.fee)
+        );
         if (val.isLessThan(minValue) || val.isNaN()) {
-          return { fill: true };
+          return { min: minValue.toString() };
         }
         return val.isLessThanOrEqualTo(res) ? null : { max: res.toString() };
       }),
