@@ -2,25 +2,6 @@ div {
   color: white;
 }
 
-.download-button {
-  width: 160px;
-  height: 50px;
-  overflow: hidden;
-  display: block;
-}
-
-.download-apple {
-  background: url('/assets/images/download_buttons.svg') 0px -50px;
-}
-
-.download-android {
-  background: url('/assets/images/download_buttons.svg') 0px -100px;
-}
-
-.download-apk {
-  background: url('/assets/images/download_buttons.svg');
-}
-
 .message {
   border-bottom: 1px solid white;
   font-size: 12pt;
@@ -31,7 +12,7 @@ div {
   color: white;
   font-weight: 300;
   font-size: 16pt;
-  padding: 5pt 40pt;
+  padding: 6pt 40pt;
   border: 1px solid white;
   background-color: #ffffff10;
   border-radius: 40pt;
