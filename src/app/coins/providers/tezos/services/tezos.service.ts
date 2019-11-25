@@ -20,6 +20,7 @@ import {
 } from "@trustwallet/rpc";
 import { combineLatest, forkJoin, from, Observable, of } from "rxjs";
 import { CoinType } from "@trustwallet/types";
+import { InsufficientFundsException } from "../../../insufficient-funds-exception";
 
 export const TezosServiceInjectable = [
   TezosConfigService,
@@ -250,7 +251,18 @@ export class TezosService implements CoinService {
   }
 
   private unstake(fromAccount: string) {
-    return this.stake(fromAccount, null);
+    return combineLatest([
+      this.config,
+      this.getBalanceUnits()
+    ]).pipe(
+      map(([config, balance]) => {
+        if (balance <= config.fee) {
+          throw new InsufficientFundsException();
+        }
+        return balance;
+      }),
+      switchMap(_ => this.stake(fromAccount, null))
+    );
   }
 
   private stake(fromAccount: string, toAccount: string): Observable<string> {

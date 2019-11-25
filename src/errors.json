@@ -1,5 +1,6 @@
 {
   "default": "Something went wrong",
   "network_error": "There is network error occurred",
-  "wallet_coin_not_supported": "Your wallet does not support this coin"
+  "wallet_coin_not_supported": "Your wallet does not support this coin",
+  "insufficient_funds": "Insufficient funds to pay fees to withdraw"
 }

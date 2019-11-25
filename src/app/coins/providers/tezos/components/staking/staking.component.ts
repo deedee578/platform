@@ -21,7 +21,6 @@ export class StakingComponent implements OnDestroy {
   hasProvider = this.tezos.hasProvider();
   price = this.tezos.getPriceUSD();
   validators: Observable<Array<BlockatlasValidator>> = this.tezos.getValidators();
-  isLoading = false;
   balance = combineLatest([
     this.config,
     this.tezos.getBalanceCoins()
